@@ -1,0 +1,6 @@
+str name = enter("Entrez votre nom : ")
+int age = enter("Entrez votre age : ")
+str age = age
+show("")
+show("Votre nom est : "+name)
+show("Vous avez "+age+" ans")
