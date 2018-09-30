@@ -9,9 +9,9 @@ Langage de programmation très simple créé en Python
 - Contributeur : x
 - Développé sous :
   - Système :
-    - Linux Manjaro / Windows 7 (Beta Fermée --> Latest)
+    - Linux Manjaro / Windows 7 (V 0.0.1 --> Latest)
   - Version Python :
-    - 3.7.0 (Beta Fermée --> Latest)
+    - 3.7.0 (V 0.0.1 --> Latest)
 
 ## Remerciements :
 - /
@@ -19,10 +19,10 @@ Langage de programmation très simple créé en Python
 ## Bugs connus de la version en développement :
 - /
 
-## Features prévues  dans un futur proche :
-- Meilleur gestion des erreurs (avec arret du programme)
+## Features prévues dans un futur proche :
 - Début des conditions
 
 ## Changelog : 
 
-### Beta Fermée.
+### V 0.0.1 : Simplex Update (INDEV) :
+- Première version
