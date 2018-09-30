@@ -2,9 +2,11 @@ from files.Parse import parser
 from files.Variable import createVariable, setVariable
 from files.ListObject import callVariable, callFunction
 from files.functionsSython.BasicFunction import initBasicFunctions
+from files.FunctionsForSython import error, setInteractif
 import sys
 
 def interpreter():
+    setInteractif(True)
     code = ""
     while True:
         code = input(">>> ")
@@ -21,12 +23,16 @@ def interpreter():
             elif todo == "callFunction":
                 result = callFunction(info[0], info[1])
             elif todo == "Erreur":
-                result = info
-            if result is not None:
-                print(result)
-                del result
+                error(info[0], info[1])
+            try:
+                if result is not None:
+                    print(result)
+                    del result
+            except:
+                pass
 
 def interpreter_on_script(text):
+    setInteractif(False)
     code = ""
     ligne = 0
     while ligne < len(text):

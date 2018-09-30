@@ -1,3 +1,5 @@
+from files.FunctionsForSython import error
+
 variables = []
 functions = []
 
@@ -10,7 +12,7 @@ def variableExist(name):
 def callVariable(name):
     var = variableExist(name)
     if not var:
-        return "Variable inconnue : "+name
+        error("UnknownVariable", "La variable '"+name+"' est inconnu")
     else:
         return var.value
 
@@ -23,11 +25,11 @@ def functionExist(name):
 def callFunction(name, parameters):
     func = functionExist(name)
     if not func:
-        return "Fonction inconnue : "+name
+        error("UnknownFunction", "La fonction '"+name+"' est inconnu")
     else:
         if func.nbParameters == 0 and parameters[0] == "":
             return func.call()
         if func.nbParameters == len(parameters):
             return func.call(parameters)
         else:
-            return "Nombre de parametres acceptés : "+str(func.nbParameters)+" - Nombre de parametres donnés : "+str(len(parameters))
+            error("NumberParameters", "Nombre de parametres acceptés : "+str(func.nbParameters)+" - Nombre de parametres donnés : "+str(len(parameters)))

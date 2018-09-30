@@ -1,5 +1,4 @@
-int result = 4 * 3
-int result = result * 2
+int result = 4 * 3 * 2
 str result = result
 str title = "4 * 3 * 2 = "
 show(title + result)

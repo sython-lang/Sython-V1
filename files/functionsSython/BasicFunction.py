@@ -1,6 +1,6 @@
 from files.ListObject import functions, variableExist, functionExist
 from files.Operations import add, subtract, multiply, divide
-from files.FunctionsForSython import is_number
+from files.FunctionsForSython import is_number, error
 
 class Show():
     def __init__(self):
@@ -30,7 +30,7 @@ class Show():
                     values[0] = info
                     del values[1]
                 else:
-                    return info
+                    error("ErrorAddition", info)
             return values[0]
         elif "+" in parameters:
             values = parameters.split("+")
@@ -53,9 +53,9 @@ class Show():
                     values[0] = info
                     del values[1]
                 else:
-                    return info
+                    error("ErrorAddition", info)
             return values[0]
-        if " - " in parameters:
+        elif " - " in parameters:
             values = parameters.split(" - ")
             while len(values) > 1:
                 var1 = variableExist(values[0])
@@ -76,7 +76,7 @@ class Show():
                     values[0] = info
                     del values[1]
                 else:
-                    return info
+                    error("ErrorSubstraction", info)
             return values[0]
         elif "-" in parameters:
             values = parameters.split("-")
@@ -99,9 +99,9 @@ class Show():
                     values[0] = info
                     del values[1]
                 else:
-                    return info
+                    error("ErrorSubstraction", info)
             return values[0]
-        if " * " in parameters:
+        elif " * " in parameters:
             values = parameters.split(" * ")
             while len(values) > 1:
                 var1 = variableExist(values[0])
@@ -122,7 +122,7 @@ class Show():
                     values[0] = info
                     del values[1]
                 else:
-                    return info
+                    error("ErrorMultiplication", info)
             return values[0]
         elif "*" in parameters:
             values = parameters.split("*")
@@ -145,9 +145,9 @@ class Show():
                     values[0] = info
                     del values[1]
                 else:
-                    return info
+                    error("ErrorMultiplication", info)
             return values[0]
-        if " / " in parameters:
+        elif " / " in parameters:
             values = parameters.split(" / ")
             while len(values) > 1:
                 var1 = variableExist(values[0])
@@ -168,7 +168,7 @@ class Show():
                     values[0] = info
                     del values[1]
                 else:
-                    return info
+                    error("ErrorDivision", info)
             return values[0]
         elif "/" in parameters:
             values = parameters.split("/")
@@ -191,7 +191,7 @@ class Show():
                     values[0] = info
                     del values[1]
                 else:
-                    return info
+                    error("ErrorDivision", info)
             return values[0]
         else:
             var = variableExist(parameters)
@@ -201,7 +201,7 @@ class Show():
                 elif is_number(parameters):
                     return parameters
                 else:
-                    return "'"+parameters+"' n'est pas un string"
+                    error("ErrorConversion", "Impossible de convertir '"+parameters+"' en string")
             else:
                 return var.value
 

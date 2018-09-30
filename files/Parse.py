@@ -48,5 +48,5 @@ def parser(code):
             parameters = [parametre[:-1]]
         return "callFunction", [name, parameters]
     else:
-        return "Erreur", "Code inconnue : "+code
+        return "Erreur", ["UnknownCode", "Code inconnu : "+code]
     
