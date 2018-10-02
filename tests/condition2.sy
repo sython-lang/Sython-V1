@@ -1,0 +1,16 @@
+int a = enter("Entrez 1 : ")
+int b = enter("Entrez 3 ou 4 : ")
+if a == 1 {
+    if b == 3 {
+        show("Vous avez entré 1 et 3")
+    }
+    elif b == 4 {
+        show("Vous avez entré 1 et 4")
+    }
+    else {
+        show("Vous avez entré 1 et un nombre inconnu")
+    }
+}
+else {
+    show("Vous n'avez pas entré 1 :(")
+}

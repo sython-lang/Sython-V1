@@ -1,0 +1,19 @@
+int a = enter("Entrez 1 : ")
+int b = enter("Entrez 2 : ")
+int c = enter("Entrez 3 : ")
+if a == 1 {
+    if b == 2 {
+        if c == 3 {
+            show("Merci")
+        }
+        else {
+            show("Pas merci (c)")
+        }
+    }
+    else {
+        show("Pas merci (b)")
+    }
+}
+else {
+    show("Pas merci (a)")
+}
