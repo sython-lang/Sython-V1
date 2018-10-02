@@ -3,11 +3,14 @@ from files.Variable import createVariable, setVariable
 from files.ListObject import callVariable, callFunction
 from files.functionsSython.BasicFunction import initBasicFunctions
 from files.FunctionsForSython import error, setInteractif
+from files.Conditions import callSimpleCondition, callMultipleCondition
 import sys
 
 def interpreter():
     setInteractif(True)
     code = ""
+    bloc = 0
+    suivant = True
     while True:
         code = input(">>> ")
         if len(code) > 1 and code[0] + code[1] == "//":
@@ -15,7 +18,7 @@ def interpreter():
         elif code == "":
             pass
         else:
-            todo, info = parser(code)
+            todo, info = parser(code, bloc, suivant)
             if todo == "defVariable":
                 result = createVariable(info[0], info[1], info[2])
             elif todo == "setVariable":
@@ -24,6 +27,18 @@ def interpreter():
                 result = callFunction(info[0], info[1])
             elif todo == "Erreur":
                 error(info[0], info[1])
+            elif todo == "ConditionValue":
+                suivant = callSimpleCondition(info[0])
+                bloc += 1
+            elif todo == "ConditionValues":
+                suivant = callMultipleCondition(info[0], info[1], info[2])
+                bloc += 1
+            elif todo == "EndBloc":
+                if bloc == 0:
+                    error("NotBlocFound", "Fin de bloc alors que aucun bloc n'est ouvert")
+                else:
+                    bloc -= 1
+                    suivant = True
             try:
                 if result is not None:
                     print(result)
@@ -35,6 +50,8 @@ def interpreter_on_script(text):
     setInteractif(False)
     code = ""
     ligne = 0
+    bloc = 0
+    suivant = True
     while ligne < len(text):
         code = text[ligne]
         if len(code) > 1 and code[0] + code[1] == "//":
@@ -42,7 +59,7 @@ def interpreter_on_script(text):
         elif code == "":
             pass
         else:
-            todo, info = parser(code)
+            todo, info = parser(code, bloc, suivant)
             if todo == "defVariable":
                 result = createVariable(info[0], info[1], info[2])
             elif todo == "setVariable":
@@ -50,10 +67,25 @@ def interpreter_on_script(text):
             elif todo == "callFunction":
                 result = callFunction(info[0], info[1])
             elif todo == "Erreur":
-                result = info
-            if result is not None:
-                print(result)
-                del result
+                error(info[0], info[1])
+            elif todo == "ConditionValue":
+                suivant = callSimpleCondition(info[0])
+                bloc += 1
+            elif todo == "ConditionValues":
+                suivant = callMultipleCondition(info[0], info[1], info[2])
+                bloc += 1
+            elif todo == "EndBloc":
+                if bloc == 0:
+                    error("NotBlocFound", "Fin de bloc alors que aucun bloc n'est ouvert")
+                else:
+                    bloc -= 1
+                    suivant = True
+            try:
+                if result is not None:
+                    print(result)
+                    del result
+            except:
+                pass
         ligne += 1
 
 if __name__ == "__main__":
