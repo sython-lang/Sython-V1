@@ -1,6 +1,8 @@
 # Sython
 Langage de programmation très simple créé en Python
 
+Documentation : https://sython-docs.readthedocs.io/fr/latest/index.html
+
 ## Dépendances :
 - Python 3.5+
 
