@@ -1,0 +1,10 @@
+int age = enter("Entrez votre age : ")
+if age == 18 {
+    show("Vous venez d'avoir 18 ans ! Bravo")
+}
+if age < 18 {
+    show("Vous n'êtes encore qu'un enfant")
+}
+if age > 18 {
+    show("Pas trop dur la vieillesse ?")
+}
