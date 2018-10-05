@@ -40,7 +40,7 @@ def parser(code, bloc, suivant):
             value1, value2 = code[3:-2].split(">=")
             return "ConditionValues", [value1, value2, ">=", suivant]
         else:
-            return "ConditionValue", [code[3:-2]]
+            return "ConditionValue", [code[3:-2], suivant]
     elif len(code) > 5 and code[:5] == "elif "and code[-2:] == " {":
         if " == " in code[5:-2]:
             value1, value2 = code[5:-2].split(" == ")
