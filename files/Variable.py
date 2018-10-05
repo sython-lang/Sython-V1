@@ -78,7 +78,6 @@ class Variable():
                         error("ErrorConversion", "Impossible de convertir '"+value+"' en "+self.type_)
                 else:
                     if " + " in value:
-                        print("a")
                         values = value.split(" + ")
                         while len(values) > 1:
                             result, info = add(values[0], values[1], self.type_)
@@ -87,6 +86,7 @@ class Variable():
                                 del values[1]
                             else:
                                 error("ErrorAddition", info)
+                                del values[1]
                         self.value = values[0]
                     elif "+" in value:
                         values = value.split("+")
