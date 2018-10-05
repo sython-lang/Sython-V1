@@ -29,8 +29,24 @@ class Variable():
             error("UnknownType", "Type inconnu : "+self.type_)
 
     def changeType(self, type_):
-        if type_ in ["int","str","float"]:
-            self.type_ = type_
+        if type_ == "int":
+            try:
+                self.type_ = type_
+                self.value = int(self.value)
+            except:
+                error("ErrorConversion", "Impossible de convertir '"+self.value+"' en entier")
+        elif type_ == "float":
+            try:
+                self.type_ = type_
+                self.value = float(self.value)
+            except:
+                error("ErrorConversion", "Impossible de convertir '"+self.value+"' en flottant")
+        elif type_ == "str":
+            try:
+                self.type_ = type_
+                self.value = str(self.value)
+            except:
+                error("ErrorConversion", "Impossible de convertir '"+self.value+"' en string")
         else:
             error("UnknownType", "Type inconnu : "+self.type_)
 
