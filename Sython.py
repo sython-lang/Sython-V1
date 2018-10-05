@@ -11,8 +11,7 @@ def interpreter():
     code = ""
     bloc = 0
     suivant = True
-    lastIf = False
-    isBlock = False
+    lastIf = [False] * 12
     while True:
         code = input(">>> ")
         if len(code) > 1 and code[0] + code[1] == "//":
@@ -23,52 +22,70 @@ def interpreter():
             todo, info = parser(code, bloc, suivant)
             if todo == "defVariable":
                 result = createVariable(info[0], info[1], info[2])
+                if suivant:
+                    lastIf[bloc] = False
             elif todo == "setVariable":
                 result = setVariable(info[0], info[1])
+                if suivant:
+                    lastIf[bloc] = False
             elif todo == "callFunction":
                 result = callFunction(info[0], info[1])
+                if suivant:
+                    lastIf[bloc] = False
             elif todo == "Erreur":
                 error(info[0], info[1])
+                if suivant:
+                    lastIf[bloc] = False
             elif todo == "ConditionValue":
-                suivant = callSimpleCondition(info[0])
-                lastIf = callSimpleCondition(info[0])
+                if info[1]:
+                    suivant = callSimpleCondition(info[0])
+                    lastIf[bloc] = suivant
                 bloc += 1
-                isBlock = suivant
             elif todo == "ConditionValues":
-                suivant = callMultipleCondition(info[0], info[1], info[2])
-                lastIf = callSimpleCondition(info[0])
+                if info[3]:
+                    suivant = callMultipleCondition(info[0], info[1], info[2])
+                    lastIf[bloc] = suivant
                 bloc += 1
-                isBlock = suivant
             elif todo == "ConditionValueELIF":
-                if lastIf:
+                if lastIf[bloc]:
                     suivant = False
                 else:
-                    suivant = callSimpleCondition(info[0])
-                    bloc += 1
-                lastIf = suivant
-                isBlock = suivant
+                    if info[1]:
+                        suivant = callSimpleCondition(info[0])
+                        lastIf[bloc] = suivant
+                bloc += 1
             elif todo == "ConditionValuesELIF":
-                if lastIf:
+                if lastIf[bloc]:
                     suivant = False
                 else:
-                    suivant = callSimpleCondition(info[0])
-                    bloc += 1
-                lastIf = suivant
-                isBlock = suivant
+                    if info[2]:
+                        suivant = callMultipleCondition(info[0], info[1], info[2])
+                        lastIf[bloc] = suivant
+                bloc += 1
             elif todo == "ConditionELSE":
-                if lastIf:
+                if lastIf[bloc]:
                     suivant = False
                 else:
-                    suivant = True
-                    bloc += 1
-                lastIf = suivant
-                isBlock = suivant
+                    if bloc - 1 >= 0:
+                        if info[0] and lastIf[bloc-1]:
+                            suivant = True
+                        else:
+                            suivant = False
+                    else:
+                        if info[0]:
+                            suivant = True
+                        else:
+                            suivant = False
+                bloc += 1
+                lastIf[bloc] = False
             elif todo == "EndBloc":
-                if bloc == 0 and bloc:
-                    error("NotBlocFound", "Fin de bloc alors que aucun bloc n'est ouvert")
-                elif isBlock:
-                    bloc -= 1
-                    suivant = True
+                bloc -= 1
+                if bloc < 0:
+                    bloc = 0
+                suivant = True
+            else:
+                if suivant:
+                    lastIf[bloc] = False
             try:
                 if result is not None:
                     print(result)
@@ -90,9 +107,7 @@ def interpreter_on_script(text):
         elif code == "":
             pass
         else:
-            #print("\n\n", code)
             todo, info = parser(code, bloc, suivant)
-            #print("->", todo, ":", info,"\nLast if :",lastIf,"\nBloc :",bloc, "\nSuivant :",suivant,"\n\n")
             if todo == "defVariable":
                 result = createVariable(info[0], info[1], info[2])
                 if suivant:
