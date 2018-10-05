@@ -222,10 +222,39 @@ class Enter():
         result = input(Show().call(parameters))
         return result
 
+class CanConvert():
+    def __init__(self):
+        self.nbParameters = 2
+        self.returnValue = True
+    
+    def call(self, parameters):
+        value, type_ = parameters
+        var = variableExist(value)
+        if var:
+            value = var.value
+        if type_ == "int":
+            try:
+                int(value)
+                return True
+            except:
+                return False
+        elif type_ == "float":
+            try:
+                float(value)
+                return True
+            except:
+                return False
+        elif type_ == "str":
+            return True
+        else:
+            return False
+
 def initBasicFunctions():
     show = Show()
     pause = Pause()
     enter = Enter()
+    canConvert = CanConvert()
     functions.append(["show", show])
     functions.append(["pause", pause])
     functions.append(["enter", enter])
+    functions.append(["canConvert", canConvert])
