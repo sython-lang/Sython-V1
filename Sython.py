@@ -125,7 +125,7 @@ def interpreter_on_script(text):
                 if suivant:
                     lastIf[bloc] = False
             elif todo == "ConditionValue":
-                if info[2]:
+                if info[1]:
                     suivant = callSimpleCondition(info[0])
                     lastIf[bloc] = suivant
                 bloc += 1
@@ -138,7 +138,7 @@ def interpreter_on_script(text):
                 if lastIf[bloc]:
                     suivant = False
                 else:
-                    if info[2]:
+                    if info[1]:
                         suivant = callSimpleCondition(info[0])
                         lastIf[bloc] = suivant
                 bloc += 1
