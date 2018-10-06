@@ -19,10 +19,10 @@ Documentation : https://sython-docs.readthedocs.io/fr/latest/index.html
 - /
 
 ## Bugs connus de la version en développement :
-- /
+- Les conditions sont encore très buggué
 
 ## Features prévues dans un futur proche :
-- Début des conditions
+- Début des boucles
 
 ## Changelog : 
 
