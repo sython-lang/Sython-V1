@@ -8,7 +8,46 @@ def parser(code, bloc, suivant):
         code = code[4*bloc:]
     else:
         return "Erreur", ["BadIndentation", "L'indentation ne correspond pas avec le nombre de bloc ouvert"]
-    if len(code) > 3 and code[:3] == "if "and code[-2:] == " {":
+    if len(code) > 6 and code[:6] == "while " and code[-2:] == " {":
+        if " == " in code[6:-2]:
+            value1, value2 = code[6:-2].split(" == ")
+            return "WhileValues", [value1, value2, "=", suivant]
+        elif "==" in code[6:-2]:
+            value1, value2 = code[6:-2].split("==")
+            return "WhileValues", [value1, value2, "=", suivant]
+        elif " <= " in code[6:-2]:
+            value1, value2 = code[6:-2].split(" <= ")
+            return "WhileValues", [value1, value2, "<=", suivant]
+        elif "<=" in code[6:-2]:
+            value1, value2 = code[6:-2].split("<=")
+            return "WhileValues", [value1, value2, "<=", suivant]
+        elif " < " in code[6:-2]:
+            value1, value2 = code[6:-2].split(" < ")
+            return "WhileValues", [value1, value2, "<", suivant]
+        elif "<" in code[6:-2]:
+            value1, value2 = code[6:-2].split("<")
+            return "WhileValues", [value1, value2, "<", suivant]
+        elif " >= " in code[6:-2]:
+            value1, value2 = code[6:-2].split(" >= ")
+            return "WhileValues", [value1, value2, ">=", suivant]
+        elif ">=" in code[6:-2]:
+            value1, value2 = code[6:-2].split(">=")
+            return "WhileValues", [value1, value2, ">=", suivant]
+        elif " > " in code[6:-2]:
+            value1, value2 = code[6:-2].split(" > ")
+            return "WhileValues", [value1, value2, ">", suivant]
+        elif ">" in code[6:-2]:
+            value1, value2 = code[6:-2].split(">")
+            return "WhileValues", [value1, value2, ">", suivant]
+        elif " != " in code[6:-2]:
+            value1, value2 = code[6:-2].split(" != ")
+            return "WhileValues", [value1, value2, "!=", suivant]
+        elif "!=" in code[6:-2]:
+            value1, value2 = code[6:-2].split("!=")
+            return "WhileValues", [value1, value2, "!=", suivant]
+        else:
+            return "WhileValue", [code[6:-2], suivant]
+    elif len(code) > 3 and code[:3] == "if "and code[-2:] == " {":
         if " == " in code[3:-2]:
             value1, value2 = code[3:-2].split(" == ")
             return "ConditionValues", [value1, value2, "=", suivant]
