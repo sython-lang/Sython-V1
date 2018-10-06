@@ -1,0 +1,15 @@
+int a = 0
+while a == 0 {
+    str age = enter("Entrez un nombre entre 10 et 20 : ")
+    while not canConvert(age, int) {
+        str age = enter("Entrez un nombre entre 10 et 20 : ")
+    }
+    int age = age
+    if age >= 10 {
+        if age <= 20 {
+            str age = age
+            show("Votre nombre est "+age)
+            a = 1
+        }
+    }
+}
