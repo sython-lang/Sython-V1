@@ -54,30 +54,30 @@ def parser(code, bloc, suivant):
         elif "==" in code[3:-2]:
             value1, value2 = code[3:-2].split("==")
             return "ConditionValues", [value1, value2, "=", suivant]
-        elif " < " in code[3:-2]:
-            value1, value2 = code[3:-2].split(" < ")
-            return "ConditionValues", [value1, value2, "<", suivant]
-        elif "<" in code[3:-2]:
-            value1, value2 = code[3:-2].split("<")
-            return "ConditionValues", [value1, value2, "<", suivant]
         elif " <= " in code[3:-2]:
             value1, value2 = code[3:-2].split(" <= ")
             return "ConditionValues", [value1, value2, "<=", suivant]
         elif "<=" in code[3:-2]:
             value1, value2 = code[3:-2].split("<=")
             return "ConditionValues", [value1, value2, "<=", suivant]
-        elif " > " in code[3:-2]:
-            value1, value2 = code[3:-2].split(" > ")
-            return "ConditionValues", [value1, value2, ">", suivant]
-        elif ">" in code[3:-2]:
-            value1, value2 = code[3:-2].split(">")
-            return "ConditionValues", [value1, value2, ">", suivant]
+        elif " < " in code[3:-2]:
+            value1, value2 = code[3:-2].split(" < ")
+            return "ConditionValues", [value1, value2, "<", suivant]
+        elif "<" in code[3:-2]:
+            value1, value2 = code[3:-2].split("<")
+            return "ConditionValues", [value1, value2, "<", suivant]
         elif " >= " in code[3:-2]:
             value1, value2 = code[3:-2].split(" >= ")
             return "ConditionValues", [value1, value2, ">=", suivant]
         elif ">=" in code[3:-2]:
             value1, value2 = code[3:-2].split(">=")
             return "ConditionValues", [value1, value2, ">=", suivant]
+        elif " > " in code[3:-2]:
+            value1, value2 = code[3:-2].split(" > ")
+            return "ConditionValues", [value1, value2, ">", suivant]
+        elif ">" in code[3:-2]:
+            value1, value2 = code[3:-2].split(">")
+            return "ConditionValues", [value1, value2, ">", suivant]
         else:
             return "ConditionValue", [code[3:-2], suivant]
     elif len(code) > 5 and code[:5] == "elif "and code[-2:] == " {":
@@ -87,33 +87,33 @@ def parser(code, bloc, suivant):
         elif "==" in code[5:-2]:
             value1, value2 = code[5:-2].split("==")
             return "ConditionValuesELIF", [value1, value2, "=", suivant]
-        elif " < " in code[5:-2]:
-            value1, value2 = code[5:-2].split(" < ")
-            return "ConditionValuesELIF", [value1, value2, "<", suivant]
-        elif "<" in code[5:-2]:
-            value1, value2 = code[5:-2].split("<")
-            return "ConditionValuesELIF", [value1, value2, "<", suivant]
         elif " <= " in code[5:-2]:
             value1, value2 = code[5:-2].split(" <= ")
             return "ConditionValuesELIF", [value1, value2, "<=", suivant]
         elif "<=" in code[5:-2]:
             value1, value2 = code[5:-2].split("<=")
             return "ConditionValuesELIF", [value1, value2, "<=", suivant]
-        elif " > " in code[5:-2]:
-            value1, value2 = code[5:-2].split(" > ")
-            return "ConditionValuesELIF", [value1, value2, ">", suivant]
-        elif ">" in code[5:-2]:
-            value1, value2 = code[5:-2].split(">")
-            return "ConditionValuesELIF", [value1, value2, ">", suivant]
+        elif " < " in code[5:-2]:
+            value1, value2 = code[5:-2].split(" < ")
+            return "ConditionValuesELIF", [value1, value2, "<", suivant]
+        elif "<" in code[5:-2]:
+            value1, value2 = code[5:-2].split("<")
+            return "ConditionValuesELIF", [value1, value2, "<", suivant]
         elif " >= " in code[5:-2]:
             value1, value2 = code[5:-2].split(" >= ")
             return "ConditionValuesELIF", [value1, value2, ">=", suivant]
         elif ">=" in code[5:-2]:
             value1, value2 = code[5:-2].split(">=")
             return "ConditionValuesELIF", [value1, value2, ">=", suivant]
+        elif " > " in code[5:-2]:
+            value1, value2 = code[5:-2].split(" > ")
+            return "ConditionValuesELIF", [value1, value2, ">", suivant]
+        elif ">" in code[5:-2]:
+            value1, value2 = code[5:-2].split(">")
+            return "ConditionValuesELIF", [value1, value2, ">", suivant]
         else:
             return "ConditionValueELIF", [code[5:-2], suivant]
-    elif "else {" in code:
+    elif "else {" == code:
         return "ConditionELSE", [suivant]
     elif suivant:
         if " = " in code:
