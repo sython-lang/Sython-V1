@@ -1,6 +1,10 @@
 from files.ListObject import variableExist, callFunction
 
 def callSimpleCondition(value):
+    no = False
+    if "not " in value:
+        value = value[4:]
+        no = True
     if "(" in value and ")" in value:
         if '"' in value:
             temp = value.split("(")
@@ -17,13 +21,22 @@ def callSimpleCondition(value):
         else:
             parameters = [parametre[:-1]]
         temp = callFunction(name, parameters)
-        return bool(temp)
+        if no:
+            return not bool(temp)
+        else:
+            return bool(temp)
     else:
         var = variableExist(value)
         if not var:
-            return bool(value)
+            if no:
+                return not bool(value)
+            else:
+                return bool(value)
         else:
-            return bool(var.value)
+            if no:
+                return not bool(var.value)
+            else:
+                return bool(var.value)
 
 def callMultipleCondition(value1, value2, type_):
     if "(" in value1 and ")" in value1 and "(" in value2 and ")" in value2:
