@@ -139,3 +139,5 @@ def callMultipleCondition(value1, value2, type_):
         return value1 > value2
     elif type_ == ">=":
         return value1 >= value2
+    elif type_ == "!=":
+        return value1 != value2
